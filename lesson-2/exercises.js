@@ -5,7 +5,7 @@ var str = "Backend As A Service";
 str = str.split(" ");
 
 for(i=0; i< str.length; i++) {
-letters.push( str[i].substr(0,1) );
+letters.push( str[i][0] );
 }
 
 str = letters.join("");
@@ -17,9 +17,9 @@ document.getElementsByClassName("result-1")[0].innerHTML = str;
 checkType (10);
   
 function checkType (arg) {
-	var date = new Date();
-	date = date.toLocaleString();
+	var date = new Date().toLocaleString();
 	var result  = document.getElementsByClassName("result-2")[0];
+	
 	if( (typeof(arg) === "number")) {
 		result.innerHTML = date;
 		console.log(date);

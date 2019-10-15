@@ -19,7 +19,6 @@ time, mark, audio, video {
 	vertical-align: baseline; 
 }
 
-
 body {
 	font: normal 16px/1em 'Roboto', sans-serif;
 }
@@ -31,25 +30,25 @@ header {
 	text-transform: uppercase;
 	margin-bottom: 15px;
 }
+
 header h1 {
 	padding: 0 15px;
 }
+
 .container {
 	width: 100%;
 	max-width: 1200px;
 	margin: 0 auto;
-	padding: 0 15px; 
 }
 
 section {
 	display: grid;
-	grid-template-columns: 50% 50%;
+	grid-template-columns: 1fr 1fr;
 	grid-column-gap: 15px;
 }
 
 .exercise {
-	min-height: 300px;
-	background-color: #FFF0F5;
+	background-color: #f7f1f0;
 	padding: 15px;
 }
 
@@ -57,7 +56,6 @@ section {
 	font-size: 20px;
 	padding-bottom: 30px;
 }
-
 
 .btn {
 	height: 50px;
