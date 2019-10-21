@@ -20,7 +20,7 @@ time, mark, audio, video {
 }
 
 body {
-	font: normal 16px/1em 'Roboto', sans-serif;
+	font: normal 16px/1.3em 'Roboto', sans-serif;
 }
 
 header {
@@ -41,25 +41,30 @@ header h1 {
 	margin: 0 auto;
 }
 
-section {
+.grid-block {
 	display: grid;
-	grid-template-columns: 1fr 1fr;
 	grid-column-gap: 15px;
 }
 
+.grid-2-columns{
+	grid-template-columns: 1fr 1fr;
+}
+
+.grid-3-columns{
+	grid-template-columns: 1fr 1fr 1fr; 
+}
+
+.grid-4-columns{
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
 .exercise {
-	background-color: #f7f1f0;
+	background-color: #f7f7f7;
 	padding: 15px;
+	min-height: 150px;
 }
 
 .exercise h2 {
 	font-size: 20px;
 	padding-bottom: 30px;
-}
-
-.btn {
-	height: 50px;
-	min-width: 150px;
-	line-height: 50px;
-	text-transform: uppercase;
 }
