@@ -1,12 +1,9 @@
 // Exercise - 1 
 
 function func() {
-	var result  = document.getElementsByClassName("result-1")[0];
 	for(x = 0; x < arguments.length; x++) {
-		result.innerHTML += arguments[x] + "<br>";
 		console.log( arguments[x] );
 		} 
-	 result.innerHTML += arguments.callee + "<br>";
 	console.log( arguments.callee ); 
 }
 
@@ -14,36 +11,28 @@ func(10, false, "google");
 
 // Exercise - 2
 
-function userInfo(name, registered, date) {
-	var result = document.getElementsByClassName("result-2")[0]
-	if( registered ) { 
-		console.log( "Дата регистрации " + date);
-		result.innerHTML += "Дата регистрации " + date + "<br>"; } 
-	else {
-		console.log( "Незарегистрированный пользователь: " + name);
-		result.innerHTML += "Незарегистрированный пользователь: " + name + "<br>";
-	}
+function userInfo() {
+	this.registered ? console.log( "Дата регистрации " + this.date) :
+				console.log( "Незарегистрированный пользователь: " + this.name); 
 }
 
-var obj = {
+var obj1 = {
 	name: "Vasya",
 	registered: true,
 	date: new Date().toLocaleDateString(),
-	getInfo: function(){
-		userInfo(this.name, this.registered, this.date);
-	}
+	getInfo: function() {}
 }
 	
- var obj2 = {
+var obj2 = {
 	name: "Vasya",
 	registered: false,
 	date: new Date().toLocaleDateString(),
-	getInfo: function() {
-		userInfo(this.name, this.registered, this.date);
-	}
+	getInfo: function() {}
 }
+obj1.getInfo = userInfo;
+obj2.getInfo = userInfo;
 
-obj.getInfo();
+obj1.getInfo();
 obj2.getInfo();
 
 // Exercise - 3
@@ -112,22 +101,14 @@ var comments = {
 function getCurrentPostComments ( postId ) {
         var res = [];
 		
-		function getAuthorName (authorId) {
-			 for ( var i in users ) {
-			     if ( i == authorId ) {
-					return users[i].name;
-				}     
-			 }
-		}
         for (var x in comments) {
 			if ( comments[x].postId === postId ) {
-				res.push(  getAuthorName ( comments[x].author ) + " : " + comments[x].text );
+				res.push(  users [ comments[ x ].author ].name + " : " + comments[x].text );
 			}
 		}
         return res; 
 }
 
 console.log(getCurrentPostComments ( 7891451));
-document.getElementsByClassName("result-3")[0].innerHTML = getCurrentPostComments ( 7891451); 
 
 	
