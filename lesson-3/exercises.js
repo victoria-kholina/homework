@@ -20,17 +20,15 @@ var obj1 = {
 	name: "Vasya",
 	registered: true,
 	date: new Date().toLocaleDateString(),
-	getInfo: function() {}
+	getInfo: userInfo
 }
 	
 var obj2 = {
 	name: "Vasya",
 	registered: false,
 	date: new Date().toLocaleDateString(),
-	getInfo: function() {}
+	getInfo: userInfo
 }
-obj1.getInfo = userInfo;
-obj2.getInfo = userInfo;
 
 obj1.getInfo();
 obj2.getInfo();
