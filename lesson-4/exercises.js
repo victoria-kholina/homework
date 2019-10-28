@@ -63,4 +63,16 @@ function LibraryBook (accessKey, bookTitle, bookYear, bookAuthor) {
 }
 
 var newBook = new LibraryBook ("123","Book Title", "Book Year", "Book Author");
+
+// Exercise - 3
+
+function SomeConstructor() {
+    this.addProperty = function (name, value) {
+        this.name = name,
+        this.value = value;
+    }
+}
+
+var newObj = new SomeConstructor;
+newObj.addProperty("someName", "someValue");
 	
