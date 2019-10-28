@@ -4,11 +4,17 @@
 // Есть предположение что нужна функция, занимающаяся непосредственно установкой ключа для библиотекаря...попробовала, не получилось :(
 // также я добавила переменную отвечающую за срок - на сколько юзер берет книгу, а после, высчитала когда книга будет доступна, но у меня есть вопросы (в коде ниже).
 // Заранее спасибо за ответы:)
+var books = [];
 
 function LibraryBook (accessKey, bookTitle, bookYear, bookAuthor) {
 	var title = bookTitle,
 		year = bookYear,
-		aurhor = bookAuthor,
+		author = bookAuthor,
+		book =  {
+			title : title,
+			year : year,
+			author : author
+		},
 		key = accessKey,
 		readerName = "",
         readerData,
@@ -60,6 +66,8 @@ function LibraryBook (accessKey, bookTitle, bookYear, bookAuthor) {
 		readerName = "",
 		readerData = "";
 	}
+	
+	books.push(book);
 }
 
 var newBook = new LibraryBook ("123","Book Title", "Book Year", "Book Author");
