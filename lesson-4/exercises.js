@@ -1,9 +1,5 @@
 // Exercise - 2 
-// Добавила ещё проверку ключа доступа до книги. 
-// Вопрос: Как сделать что бы ключ устанавливался только один раз для одного библиотекаря, а не для каждой книги, как в примере ниже
-// Есть предположение что нужна функция, занимающаяся непосредственно установкой ключа для библиотекаря...попробовала, не получилось :(
-// также я добавила переменную отвечающую за срок - на сколько юзер берет книгу, а после, высчитала когда книга будет доступна, но у меня есть вопросы (в коде ниже).
-// Заранее спасибо за ответы:)
+
 var books = [];
 
 function LibraryBook (accessKey, bookTitle, bookYear, bookAuthor) {
@@ -28,34 +24,28 @@ function LibraryBook (accessKey, bookTitle, bookYear, bookAuthor) {
 		if (checkKey()) {
 			readerName = client;
 			readerData = new Date().toLocaleDateString();
-			isNaN( Number(term) ) ? days = null : days = term; // проверяем ввели ли число
+			term instanceof Date ? days = null : days = term; //проверяем приводятся ли введенные данные к обьекту класса Date
 		} else {
 			console.log("Sorry, but without right access key we have to say you 'Goodbye'!");
 		}
 	}
 	
+	function getRelativeDate ( date, days ) {
+			date.setFullYear (
+				date.getFullYear(),
+				date.getMonth(),
+				date.getDate() + days
+			)
+			return date.toLocaleDateString();
+	}
+	
 	this.getBookInfo = function() {
-        if(readerData === "") {
-            console.log("This book is available. Just take it!") 
-        } else {
-            if (days !== null) {
-				// Вопрос: Почему в коде ниже я не могу сделать вот так ${readerData.setDate(readerData.getDate() + days).toLocaleDateString()} ?
-				// Я имею в виду почему нужно их разбивать?
-				// И ещё вопросик, почему у меня не получилось вот так вот, например:
-				//  var today = new Date();
-				//	var newDate = today.setDate(today.getDate() + days);
-				// 	newDate.toLocaleDateString();
-				
-                readerData.setDate(readerData.getDate() + days); 
-                console.log(`Sorry, your book is occupied by another reader by ${readerData.toLocaleDateString()}`); 
-             } else {
-				 // если в виде срока на которую брали книгу, ввели что-то не приводящиеся к числу, то мы просто выведем дату
-                console.log(`Sorry, your book was taken by another reader ${readerData} `) 
-             }
-        }
+        !readerData ? console.log("This book is available. Just take it!") :
+				days ? console.log(`Sorry, your book is occupied by another reader by ${ getRelativeDate ( new Date(), days ) }`) :
+						console.log(`Sorry, your book was taken by another reader ${readerData} `) 
 	}
 	this.getTheBook = function ( client, term ) {
-		if(readerName === "") { 
+		if(!readerName) { 
             giveTheBook(client, term);
 			return console.log(`please take your book "${ bookTitle }"`);
 		} else {
@@ -74,12 +64,12 @@ var newBook = new LibraryBook ("123","Book Title", "Book Year", "Book Author");
 
 // Exercise - 3
 
-function SomeConstructor() {
-    this.addProperty = function (name, value) {
+function SomeConstructor() {}
+
+SomeConstructor.prototype.addProperty = function (name, value) {
         this.name = name,
         this.value = value;
-    }
-}
+    };
 
 var newObj = new SomeConstructor;
 newObj.addProperty("someName", "someValue");
