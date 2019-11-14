@@ -1,8 +1,6 @@
 // Exercise - 1 
 
-// Добавила динамичное добавление классов в стили
-// Вопрос: Какой вариант правильнее из 2-x?
-//Вариант 1
+//Option 1
 var tags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
 var classes = ['.first', '.second', '.third', '.fourth', '.fifth', '.sixth'];//сразу с точкой
 var style = document.head.appendChild ( document.createElement ( 'style' ) )
@@ -19,7 +17,7 @@ for (var i = 0; i< tags.length; i++) {
     elem.className += classes[i].slice(1, classes[i].length);
 }
 
-//Вариант 2
+//Option 2
 
 var tags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
 var classes = ['first', 'second', 'third', 'fourth', 'fifth', 'sixth']; //без точки
