@@ -1,8 +1,6 @@
 // Exercise - 1 
-// не знаю правильный ли этот вариант, думаю что надо было сделать с requestAnimationFrame
-// но сделать это с помощью рекурсии мне понятнее чем с requestAnimationFrame :( как то так получилось))
-
-var elem = document.body.appendChild(document.createElement("div"));
+var container = document.getElementsByClassName("time")[0];
+var elem = container.appendChild(document.createElement("div"));
 
 var timer = function (currTime = 0) {
    

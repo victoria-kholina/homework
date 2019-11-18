@@ -31,9 +31,6 @@ header {
 	margin-bottom: 15px;
 }
 
-header h1 {
-	padding: 0 15px;
-}
 
 .container {
 	width: 100%;
@@ -46,15 +43,15 @@ header h1 {
 	grid-column-gap: 15px;
 }
 
-.grid-2-columns{
+.grid-2-columns {
 	grid-template-columns: 1fr 1fr;
 }
 
-.grid-3-columns{
+.grid-3-columns {
 	grid-template-columns: 1fr 1fr 1fr; 
 }
 
-.grid-4-columns{
+.grid-4-columns {
 	grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
@@ -67,4 +64,24 @@ header h1 {
 .exercise h2 {
 	font-size: 20px;
 	padding-bottom: 30px;
+}
+
+li {
+	list-style-type: none;
+	padding: 10px;
+	margin-bottom: 15px;
+	width: 100%;
+	background-color: #f7f7f7;
+}
+
+li a,
+li a:focus,
+li a:active,
+li a:visited {
+	color: #000;
+	text-decoration: none;
+}
+
+li a:hover {
+	color: #999;
 }
