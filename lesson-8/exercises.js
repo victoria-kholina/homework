@@ -23,10 +23,54 @@ timer();
 
 // Exercise - 2
 
+var typeMessage = ( function ( velocity ) {
+    var demo;
+    let container = demo ? demo :
+        document.body.appendChild (
+            document.createElement ( "h3" )
+        )
+    container.style = `color: magenta;`
+    container.id = "demo"
+    var index = 0
+    return function ( message ) {
+      demo = document.getElementById("demo");
+      function runSimbol() {
+          setTimeout(
+            () => {
+                demo.innerText += message[index]
+                index++;
+                typeMessage(message);
+            }, 
+            velocity * 1000
+          )
+      }
+      index < message.length ? runSimbol() : null
+    }
+})( 1 )
+
+typeMessage ( `Welcome to the hell` )
 
 
 
 // Exercise - 3
 
+function User ( name ) {
+    this.name = name
+    this.id = User.counter()
+}
 
+User.counter = (
+ function () {
+        var counter = 0;
+        return () => counter++;
+    }
+)()
+   
+
+var users = [
+    new User ( "Семен" ),
+    new User ( "Антон" ),
+    new User ( "Демьян" ),
+    new User ( "Василий" )
+]
 
