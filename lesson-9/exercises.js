@@ -1,5 +1,5 @@
 // Exercise - 1 
-// Сделала 2 варианта по-тому что не понятно, вроде как этот смотрится ок..
+// Сделала 2 варианта потому что не понятно, вроде как этот смотрится ок..
 // вариант 1
 function typeMessage ( message, velocity ) {
     var container = document.getElementById ( "demo" ) ?
