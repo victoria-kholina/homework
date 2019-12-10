@@ -8,7 +8,7 @@ let cookieKey = document.cookie.split(";")
                .find( item => item[0].trim() === str );
 
 if (cookieKey) 
-   document.body.appendChild(document.createElement("div")).innerHTML = cookieKey[1]         
+   document.body.appendChild(document.getElementById("date")).innerHTML = cookieKey[1]         
    document.cookie =  `${ cookieKey[0] }=${new Date().toLocaleDateString()}`;         
 
 
