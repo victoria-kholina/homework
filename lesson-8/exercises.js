@@ -1,15 +1,14 @@
 // Exercise - 1 
-var container = document.getElementsByClassName("time")[0];
-var elem = container.appendChild(document.createElement("div"));
+var elem = document.getElementById("time").appendChild(document.createElement("div"));
 
-var timer = function (currTime = 0) {
+var timer = function (currTime = 100) {
    
-    if(currTime < 100000) {
+    if(currTime > 0) {
         setTimeout (
             function () {
                 var date = new Date;
                 elem.innerText = date.toLocaleTimeString() 
-                timer(currTime += 1000);
+                timer(--currTime);
             },
             1000
         )
@@ -24,9 +23,10 @@ timer();
 // Exercise - 2
 
 var typeMessage = ( function ( velocity ) {
-    var demo;
+    let demo;
+	let textContainer = document.getElementById("text");
     let container = demo ? demo :
-        document.body.appendChild (
+        textContainer.appendChild (
             document.createElement ( "h3" )
         )
     container.style = `color: magenta;`
@@ -37,7 +37,7 @@ var typeMessage = ( function ( velocity ) {
       function runSimbol() {
           setTimeout(
             () => {
-                demo.innerText += message[index]
+                demo.innerHTML += message[index]
                 index++;
                 typeMessage(message);
             }, 

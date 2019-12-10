@@ -64,6 +64,7 @@ header {
 .exercise h2 {
 	font-size: 20px;
 	padding-bottom: 30px;
+	text-transform: uppercase;
 }
 
 li {
@@ -84,4 +85,51 @@ li a:visited {
 
 li a:hover {
 	color: #999;
+}
+
+.second-level-menu { 
+	background-color: #ccc;
+	padding: 5px; 		
+	margin: 10px 0;
+	color: #fff;
+	font-weight: bold;
+}
+
+#type-writer {
+	min-height: 50px;
+	}
+	
+#url {
+	margin-top: 15px;
+	padding: 10px 20px;
+}
+
+#url,
+button {
+	background-color: #000;
+	color: #fff;
+}
+button {
+	height: 40px;
+	padding: 10px 20px;
+	border: 1px solid #000;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	cursor: pointer;
+}
+
+button,
+.game img {
+	transition: 1s ease-in-out ;
+}
+.game img {
+	margin: 20px 0;
+	width: auto;
+	height: 200px;
+}
+button:hover,
+button:focus,
+button:active {
+	background-color: #fff;
+	color: #000
 }
