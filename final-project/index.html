@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://fonts.googleapis.com/css?family=Roboto:300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <script src="https://cdn.rawgit.com/chrisveness/crypto/4e93a4d/sha256.js"></script>
+<body>
+<div class="container">
+    <section>
+        <form  id="registration-form" class="form" >
+            <div class="form-item">
+                <input type="text" name="login" id="login">
+                <span class="error"></span>
+            </div>
+            <div class="form-item">
+                <input type="password" name="password" id="password">
+                <span class="error"></span>
+            </div>
+            <div class="form-item">
+                <input type="file" name="avatar"  id="avatar" >
+                <span class="error"></span>
+            </div>
+        </form>
+        <button id="registration-btn" >Submit</button>
+    </section>
+
+    <section>
+        <form  id="sign-in-form" class="form" >
+            <div class="form-item">
+                <input type="text" name="login" id="user-login">
+                <span class="error"></span>
+            </div>
+            <div class="form-item">
+                <input type="password" name="password" id="user-password">
+                <span class="error"></span>
+            </div>
+        </form>
+        <button id="sign-in-btn" >Submit</button>
+    </section>
+
+</div>
+<script src="main.js"></script>
+</body>
+</html>

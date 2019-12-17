@@ -133,3 +133,17 @@ button:active {
 	background-color: #fff;
 	color: #000
 }
+
+.form__item, .error {
+	display: block;
+}
+.error {
+	font-size: 12px;
+	color: red;
+	border: 1px solid red;
+	padding: 10px;
+	min-height: 20px;
+}
+.not-valid {
+	border: 1px solid red;
+}
