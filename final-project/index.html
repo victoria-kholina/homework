@@ -2,47 +2,76 @@
 
 <html lang="en">
 <head>
-    <title></title>
+    <title>Sign in</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<link href="https://fonts.googleapis.com/css?family=Roboto:300&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../style.css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> <!-- for flex IE Edge-->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
     <script src="https://cdn.rawgit.com/chrisveness/crypto/4e93a4d/sha256.js"></script>
-<body>
-<div class="container">
-    <section>
-        <form  id="registration-form" class="form" >
-            <div class="form-item">
-                <input type="text" name="login" id="login">
-                <span class="error"></span>
-            </div>
-            <div class="form-item">
-                <input type="password" name="password" id="password">
-                <span class="error"></span>
-            </div>
-            <div class="form-item">
-                <input type="file" name="avatar"  id="avatar" >
-                <span class="error"></span>
-            </div>
-        </form>
-        <button id="registration-btn" >Submit</button>
-    </section>
 
-    <section>
-        <form  id="sign-in-form" class="form" >
-            <div class="form-item">
-                <input type="text" name="login" id="user-login">
-                <span class="error"></span>
-            </div>
-            <div class="form-item">
-                <input type="password" name="password" id="user-password">
-                <span class="error"></span>
-            </div>
-        </form>
-        <button id="sign-in-btn" >Submit</button>
-    </section>
+<body class="page">
+<div class="user-account-wrapper grid-center">
+    <section class="user-account" id="user-account">
+        <div class="user-login grid-block grid-2-columns" id="login-container">
 
+            <div class="col grid-center" id="sign-in">
+
+                <!--  Sign in form   -->
+                <div class="form">
+                    <h3 class="form__title subtitle">Sign in to your account</h3>
+                        <form  id="sign-in-form" >
+                            <input type="text" name="login" id="user-login" class="form__item" placeholder="*Enter your login">
+                            <span class="error"></span>
+
+                            <input type="password" name="password" id="user-password" class="form__item" placeholder="*Enter your password">
+                            <span class="error"></span>
+                        </form>
+                        <p class="form__link">Not registered yet? <a href="#sign-up">Sign up</a></p>
+                        <button id="sign-in-btn" class="btn" >Sign in</button>
+                </div>
+            </div>
+
+            <div class="col grid-center" id="sign-up">
+                <div class="form">
+
+                    <!--  Registration form   -->
+                    <form  id="registration-form" >
+                            <h3 class="form__title subtitle">Create your account</h3>
+                            <input type="text" name="login" id="login" class="form__item" placeholder="*Enter your login">
+                            <span class="error"></span>
+
+                            <input type="password" name="password" id="password" class="form__item" placeholder="*Enter your password">
+                            <span class="error"></span>
+
+                            <input type="file" name="avatar"  id="avatar" class="form__item file">
+                            <span class="error"></span>
+                                <div class="avatar">
+                                    <img src="user.png" alt="" id="user-photo">
+                                </div>
+                        </form>
+                        <p class="form__link">Already have an account? <a href="#sign-in">Sign in</a></p>
+                        <button id="registration-btn" class="btn" >Sign up</button>
+                </div>
+            </div>
+        </div>
+
+        <!--  User Accaunt  -->
+        <div class="welcome grid-block" id="welcome-container">
+                <div class="welcome__img">
+                    <div class="avatar">
+                        <img src="user.png" alt="" id="user-avatar">
+                    </div>
+                </div>
+                <div class="welcome__title">
+                    <h1 id="welcome-user">Hello Kristina </h1>
+                    <h2 class="subtitle">nice to meet you</h2>
+                </div>
+            <button class="welcome__link grid-center" id="sign-out">Sign out</button>
+        </div>
+    </section>
 </div>
+
 <script src="main.js"></script>
 </body>
 </html>

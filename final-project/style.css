@@ -1,0 +1,337 @@
+/* RESET STYLES */
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {  
+	margin: 0;
+	padding: 0;
+	border: 0;
+	vertical-align: baseline;
+}
+input,
+button {
+	outline:none;
+	box-shadow: none;
+}
+button {
+	cursor:pointer;
+}
+a,
+a:hover,
+a:focus,
+a:visited,
+a:active {
+	color: #000;
+}
+
+body {
+	font: 300 14px/1em 'Source Sans Pro', sans-serif;
+	letter-spacing: .6px;
+}
+
+.grid-block {
+	display: grid;
+	display:-ms-grid;
+}
+.grid-2-columns {
+	grid-template-columns: 1fr 1fr;
+	-ms-grid-columns: 1fr 1fr;
+}
+.grid-center {
+	display: grid;
+	display:-ms-grid;
+	justify-content: center;
+	align-items: center;
+}
+
+.btn {
+	background-color: #000;
+	color: #fff;
+	width: 100%;
+	padding: 10px 20px;
+	border: 1px solid #000;
+}
+
+.btn:hover,
+.btn:focus,
+.btn:active {
+	background-color: #fff;
+	color: #000
+}
+
+.file::before,
+.welcome__link {
+	background-color: #fff;
+	min-width: 100px;
+	border: 1px solid #000;
+
+}
+.file::before,
+.welcome__link,
+.btn {
+	height: 40px;
+	font: 300 14px/1em 'Source Sans Pro', sans-serif;
+	transition: 0.5s ease-in-out;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	cursor: pointer;
+}
+.welcome__link {
+	padding: 0 20px;
+	margin: 40px auto 0;
+}
+.file:hover::before,
+.white-btn:hover {
+	background-color: #000;
+	color: #fff;
+}
+
+.user-account-wrapper {
+	height: 100vh;
+	width: 100vw;
+	position: relative;
+	background: linear-gradient(-45deg,  rgba(247,247,247,1) 60%, rgba(255,255,255,1) 60%, rgba(255,255,255,0) 100%);
+}
+
+.user-account {
+	width: 300px;
+	height: 550px;
+	border: 1px solid #000;
+	overflow: hidden;
+	scroll-behavior: smooth;
+	background-color: #fff;
+}
+.animation-hide {
+	animation: square-hide 0.7s ease-in-out;
+	animation-fill-mode: both;
+}
+@keyframes square-hide {
+	0%  { transform: scale(1); }
+	25%  { transform: scale(0.95); }
+	50%  { transform: scale(1); }
+	100%  { transform: scale(0); }
+}
+.animation-hide,
+.animation-show {
+	animation-fill-mode: both;
+}
+.animation-show {
+	animation: square-show 0.7s ease-in-out;
+}
+@keyframes square-show {
+	0%  { transform: scale(0); }
+	100%  { transform: scale(1); }
+}
+
+.user-login {
+	width : 600px;
+	height: 100%;
+}
+.user-login .col {
+	padding: 20px;
+}
+.form {
+	width: 100%;
+	text-align: center;
+}
+.form__item {
+	font: 300 14px/1em 'Source Sans Pro', sans-serif;
+	border: none;
+	height: 40px;
+	letter-spacing: .6px;
+	outline: none;
+}
+input:-webkit-autofill {
+	-webkit-box-shadow: inset 0 0 0 50px #fff !important; /* Цвет фона */
+}
+.form__item:not(.file) {
+	border-bottom: 1px solid #000;
+}
+.file {
+	z-index: 0;
+	position: relative;
+}
+.file::-webkit-file-upload-button {
+	visibility: hidden;
+}
+.file::before {
+	content: 'Upload your photo';
+	width: 100%;
+	display: grid;
+	display:-ms-grid;
+	justify-content: center;
+	align-items: center;
+	position: absolute;
+	z-index: 1;
+	-webkit-user-select: none;
+	cursor: pointer;
+	box-sizing: border-box;
+}
+.file + span {
+	text-align: center;
+}
+.form__item::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+	color: #000;
+ }
+.form__item::-moz-placeholder { /* Firefox 19+ */
+	color: #000;
+ }
+.form__item:-ms-input-placeholder { /* IE 10+ */
+	color: #000;
+ }
+.form__item:-moz-placeholder { /* Firefox 18- */
+	color: #000;
+ }
+.form__item:focus::-webkit-input-placeholder {
+	 opacity: 0;
+}
+.form__item:focus::-moz-placeholder {
+	 opacity: 0;
+}
+.form__item:focus:-ms-input-placeholder {
+	 opacity: 0;
+}
+.form__item:focus:-moz-placeholder {
+	 opacity: 0;
+ }
+
+.form__item, .error {
+	display: block;
+	width: 100%;
+}
+.error {
+	font-size: 11px;
+	font-style: italic;
+	height: 20px;
+	line-height: 2em;
+	text-align: left;
+}
+.form__title {
+	padding: 10px 0 20px;
+	text-transform: uppercase;
+	font-size: 22px;
+}
+.form__link {
+	margin: 15px 0;
+}
+.form__link a {
+	font-style: italic;
+}
+.welcome {
+	display: none;
+	text-align: center;
+}
+
+.welcome__img {
+	background-color: #FFF0F5;
+	width: 100%;
+	min-height: 150px;
+	position: relative;
+	z-index: 1;
+}
+.welcome__img:after,
+.welcome__img .avatar {
+	position: absolute;
+	left: 50%;
+}
+.subtitle:after,
+.welcome__img:after {
+	content: "";
+	display: block;
+}
+.welcome__img:after {
+	width: 250px;
+	margin-left: -125px;
+	height: 30px;
+	bottom: -15px;
+	border-top: 1px solid #000;
+	border-bottom: 1px solid #000;
+	transform: skewX(-50deg);
+	z-index: -1;
+	transition: 0.5s ease-in-out;
+}
+.welcome__img:hover:after {
+	transform: skewX(50deg);
+}
+.subtitle {
+	font-weight: 300;
+	display: inline-block;
+}
+.subtitle:after {
+	background-color: #FFF0F5;
+	height: 40px;
+	margin: -5px -10px 0;
+}
+.avatar {
+	background-color: #fff;
+	box-sizing: border-box;
+	width: 150px;
+	height: 150px;
+	overflow: hidden;
+	border: 1px solid #000;
+	border-radius: 50%;
+	margin: 0 auto;
+}
+
+.welcome__img .avatar {
+	bottom: -75px;
+	margin-left: -75px;
+}
+.avatar img {
+	max-height: 150px;
+	margin-top: 50%;
+	margin-left: 50%;
+	transform: translate(-50%,-50%);
+}
+.welcome__title {
+	margin-top: 100px;
+	padding: 0 20px;
+}
+.welcome__title h1{
+	color: #f7f7f7;
+	line-height: 1em;
+	font-size: 42px;
+	font-weight: 900;
+	letter-spacing: 0;
+	-webkit-text-fill-color: #f7f7f7;
+	-webkit-text-stroke-color: #000;
+	-webkit-text-stroke-width: 1px;
+}
+.welcome__title h2 {
+	font-size: 32px;
+	margin-top: 20px;
+}
+
+@media screen and (min-width: 600px) {
+	.user-account {
+		width: 500px;
+	}
+	.user-login {
+		width : 1000px;
+	}
+	.form {
+		width: 300px;
+	}
+	.welcome__title h1 {
+		font-size: 60px;
+	}
+	.form__title {
+		letter-spacing: 1.2px;
+		font-size: 24px;
+	}
+}
+@media screen and (min-width: 375px) {
+	.user-account {
+		height: 600px;
+	}
+}
