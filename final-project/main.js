@@ -1,31 +1,39 @@
-
-let mainContainer = document.getElementById("user-account"),
-    userLogin =  document.getElementById("user-login"),
-    userPsw = document.getElementById("user-password"),
-    urlDB = 'http://localhost:3000/users';
+history.replaceState(null, null, ' ');
+function getElem(elemId) {
+    return  document.getElementById(elemId);
+}
 
 // check if autofilled we will in the end when check psw from sign in form
-let autofilled = true;
-document.cookie  ? getAutofill() : null;
+let  mainContainer = getElem("user-account"),
+      autofilled = true;
 
 function getAutofill() {  // get info form cookies and autofill form inputs in sign in form
     document.cookie.split(";")
         .map(item => item.split("="))
-        .map(item => item[0] === "login" ? userLogin.value = item[1] :
-            item[0].trim() === "psw" ? userPsw.value = item[1] : autofilled = false)
+            .map(item => item[0] === "login" ? getElem("user-login").value = item[1] :
+                item[0].trim() === "psw" ? getElem("user-password").value = item[1] : autofilled = false)
 }
 
-// START REGISTRATION FORM
+if (localStorage.getItem("signed-in") ) {
+    getElem("login-container").style.display = "none";
+    fetch ( `https://garevna-rest-api.glitch.me/user/${localStorage.getItem("signed-in")}`)
+                .then (response => response.json()).then(user => showAccount(user))
+                    .then(()=> {
+                        getElem("welcome-container").style.display = "grid";
+                        mainContainer.classList.add("animation-show")
+                })
+} else {
+    mainContainer.classList.add("animation-show");
+    document.cookie  ? getAutofill() : null;
+}
 
-let avatar = document.getElementById("avatar"),
-     login = document.getElementById("login"),
-     password = document.getElementById("password");
+// Start Registration form Validation
 
 let imageBase64;
-avatar.onchange = function (event) {  // getting image from obj in base64
-    checkImg(avatar)
+getElem("avatar").onchange = function (event) {  // getting image from obj in base64
+    checkImg(event.target)
     let reader = new FileReader();
-    reader.readAsDataURL(avatar.files[0])
+    reader.readAsDataURL(event.target.files[0])
     reader.onload = function (ev) {
         imageBase64 = ev.target.result;
     }
@@ -36,19 +44,17 @@ function errorText (input, message) {
     return input.nextElementSibling.innerText = message;
 }
 
-// setting GET  reguste to get users from json
-var getUsers = fetch ( urlDB).then (response => response.json());
-
 // check if in db is the same login
-login.oninput = function (event) {
-    getUsers .then (users => users.find( user => user.login === this.value) ?
-        errorText (this,"Sorry, but this login is already occupied by another user. ")  :
-        errorText (this,"")
-    ) }
+getElem("login").onchange = function (event) {
+    event.target.value != "" ?
+        fetch ( `https://garevna-rest-api.glitch.me/user/${event.target.value}`)
+                .then (response => response.json())
+                    .then(response => {
+                        !response.error ? errorText (event.target,"Sorry, but this login is already occupied by another user. ") : errorText (event.target,"")
+                    }) : errorText (event.target,"This field is required")
+}
 
-password.oninput = function (event) {  checkPsw(password) }
-
-// VALIDATION
+getElem("password").oninput = function (event) {  checkPsw(event.target) }
 
 function checkImg(img) {
     !img.files[0] ? null :
@@ -59,7 +65,7 @@ function checkImg(img) {
 
 function showImgUploaded(img) {
     errorText (img,"");
-    let userPhoto =document.getElementById('user-photo');
+    let userPhoto = getElem('user-photo');
     userPhoto.src = URL.createObjectURL(img.files[0]);
 }
 
@@ -99,10 +105,14 @@ function isValid(form) {
 
 // REGISTRATION FORM SUBMIT
 
-document.getElementById("registration-btn").onclick= function (event) {
+getElem("registration-btn").onclick= function (event) {
     const user = {};
+    let avatar = getElem("avatar"),
+          login = getElem("login"),
+          password = getElem("password");
 
-    if (isValid(document.getElementById("registration-form")) != false ) {
+
+    if ( isValid( getElem("registration-form") ) != false ) {
 
         !avatar.files[0] ? user[avatar.name] = false : user[avatar.name] = imageBase64;
         user[login.name] = login.value;
@@ -112,7 +122,7 @@ document.getElementById("registration-btn").onclick= function (event) {
         document.cookie= `login=${login.value}`;
         document.cookie= `psw=${pswHash}`;
 
-        fetch ( urlDB, {
+        fetch ( `https://garevna-rest-api.glitch.me/user/${login.value}`, {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json"
@@ -127,43 +137,69 @@ document.getElementById("registration-btn").onclick= function (event) {
     }
 }
 
-// ANIMATION trigger
-function triggerDisplay(elemHide, elemShow) {
+
+function triggerDisplay(elemHide, elemShow) {   // Animation trigger
     mainContainer.classList.remove("animation-show");
     mainContainer.classList.add("animation-hide");
    setTimeout(()=>{
        mainContainer.classList.add("animation-show");
-       document.getElementById(elemHide).style.display ="none";
-       document.getElementById(elemShow).style.display ="grid";
+       getElem(elemHide).style.display ="none";
+       getElem(elemShow).style.display ="grid";
     },700)
-
 }
+
 function showAccount(user) {
-    triggerDisplay("login-container","welcome-container" );
+    if (getElem("login-container").style.display != "none") triggerDisplay("login-container","welcome-container" );
     history.replaceState(null, null, ' ');
     if(user.avatar ) {
-        document.getElementById("user-avatar").src = user.avatar
+        getElem("user-avatar").src = user.avatar
     }
-    document.getElementById("welcome-user").innerHTML = `Hello ${user.login}`
+    getElem("welcome-user").innerHTML = `Hello ${user.login}`
+    localStorage.setItem("signed-in", user.login);
 }
 
 function getPsw() {
+    let userPsw = getElem("user-password");
     return  autofilled ? userPsw.value : Sha256.hash (userPsw.value);
 }
 
+let formFields = getElem("sign-in-form").getElementsByTagName("input");
+
 // SIGN IN
-document.getElementById("sign-in-btn").onclick = function (event) {
-    getUsers.then ( users => {
-        console.log(users);
-        var user = users.find( user => user.login === userLogin.value);
-        user ? user.password === getPsw() ? showAccount(user) :
-            errorText (userPsw, "Password is wrong. Try again") :
-            errorText (userLogin, "Sorry, we can not find user with such login")
-    } )
+getElem("sign-in-btn").onclick = function (event) {
+    let userLogin = getElem("user-login");
+    for(field of formFields) {
+        field.value == "" ? errorText (field, "This field is required") : null
+    }
+    if (userLogin.value)
+        fetch( `https://garevna-rest-api.glitch.me/user/${userLogin.value}`)
+            .then (response => response.json())
+                .then ( user => {
+                    user.login === userLogin.value ? user.password === getPsw() ? showAccount(user) :
+                        errorText (getElem("user-password"), "Password is wrong. Try again") :
+                        errorText (userLogin, "Sorry, we can not find user with such login")
+                } )
 }
 
 // SIGN OUT
-document.getElementById("sign-out").onclick = function (event) {
+getElem("sign-out").onclick = function (event) {
     triggerDisplay("welcome-container", "login-container" )
     getAutofill();
+    localStorage.removeItem("signed-in")
+}
+
+// DELETE ACCOUNT
+getElem("delete-account").onclick = function (event) {
+    fetch ( `https://garevna-rest-api.glitch.me/user/${localStorage.getItem("signed-in") }`, {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).then ( response => {
+        localStorage.removeItem("signed-in");
+        document.cookie = "login=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"
+        document.cookie = "psw=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"
+        for (field of formFields)  field.value = ""
+        triggerDisplay("welcome-container", "login-container" )
+    })
 }
