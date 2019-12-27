@@ -181,7 +181,6 @@ getElem("sign-in-btn").onclick = function (event) {
 // SIGN OUT
 getElem("sign-out").onclick = function (event) {
     triggerDisplay("welcome-container", "login-container" )
-    getElem("user-login").value = loginInCookie
     document.cookie= `signed-out=true`;
 }
 
