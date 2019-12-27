@@ -38,6 +38,8 @@ a:active {
 body {
 	font: 300 14px/1em 'Source Sans Pro', sans-serif;
 	letter-spacing: .6px;
+	height: 100%;
+	width: 100%;
 }
 
 .grid-block {
@@ -46,15 +48,46 @@ body {
 }
 .grid-2-columns {
 	grid-template-columns: 1fr 1fr;
+	grid-template-rows: 1fr;
 	-ms-grid-columns: 1fr 1fr;
 }
-.grid-center {
-	display: grid;
-	display:-ms-grid;
+.flex-center {
+	display: flex;
+	display:-ms-flex;
 	justify-content: center;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
 	align-items: center;
 }
 
+#no-support-msg {
+	display: none;
+	text-transform: uppercase;
+	line-height: 1.5em;
+	margin: 20px;
+	background-color: rgba(255,255,255,0);
+}
+
+@media screen and (-ms-high-contrast: active),
+screen and (-ms-high-contrast: none) {
+	#no-support-msg {
+		display: block;
+	}
+	.user-account {
+		display:none;
+	}
+	.flex-center {
+		display: block;
+	}
+}
+:root #no-support-msg {
+	display: block\0;
+}
+:root .user-account {
+	display:none\0;
+}
 .btn {
 	background-color: #000;
 	color: #fff;
@@ -146,9 +179,19 @@ body {
 	width : 600px;
 	height: 100%;
 }
+
 .user-login .col {
 	padding: 20px;
 }
+.user-login .col:first-child {
+	-ms-grid-row: 1;
+	-ms-grid-column: 1;
+}
+.user-login .col:last-child {
+	-ms-grid-row: 1;
+	-ms-grid-column: 2;
+}
+
 .form {
 	width: 100%;
 	text-align: center;
@@ -177,7 +220,11 @@ input:-webkit-autofill {
 	width: 100%;
 	display: grid;
 	display:-ms-grid;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
 	justify-content: center;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
 	align-items: center;
 	position: absolute;
 	z-index: 1;

@@ -8,10 +8,10 @@ let  mainContainer = getElem("user-account"),
       autofilled = true;
 
 function getAutofill() {  // get info form cookies and autofill form inputs in sign in form
-    document.cookie.split(";")
+    document.cookie.split("; ")
         .map(item => item.split("="))
             .map(item => item[0] === "login" ? getElem("user-login").value = item[1] :
-                item[0].trim() === "psw" ? getElem("user-password").value = item[1] : autofilled = false)
+                item[0] === "psw" ? getElem("user-password").value = item[1] : autofilled = false)
 }
 
 if (localStorage.getItem("signed-in") ) {
@@ -197,9 +197,10 @@ getElem("delete-account").onclick = function (event) {
         }
     }).then ( response => {
         localStorage.removeItem("signed-in");
-        document.cookie = "login=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"
-        document.cookie = "psw=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"
-        for (field of formFields)  field.value = ""
+        let emptyDate = new Date ( 0 ).toUTCString ();
+        document.cookie = "login=; expires=" + emptyDate;
+        document.cookie = "psw=; expires=" + emptyDate;
+        for (field of formFields)  { field.value = "" }
         triggerDisplay("welcome-container", "login-container" )
-    })
+    } )
 }

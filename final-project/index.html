@@ -5,17 +5,19 @@
     <title>Sign in</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"> <!-- for flex IE Edge-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.rawgit.com/chrisveness/crypto/4e93a4d/sha256.js"></script>
 
 <body class="page">
-<div class="user-account-wrapper grid-center">
+<div class="user-account-wrapper flex-center">
+    <p id="no-support-msg"> Sorry, but Internet Explorer is unsupported browser. <br>
+        We generally support the recent versions of major browsers like Chrome, Firefox, Safari, and Edge.  </p>
     <section class="user-account" id="user-account">
         <div class="user-login grid-block grid-2-columns" id="login-container">
 
-            <div class="col grid-center" id="sign-in">
+            <div class="col flex-center" id="sign-in">
 
                 <!--  Sign in form   -->
                 <div class="form">
@@ -32,7 +34,7 @@
                 </div>
             </div>
 
-            <div class="col grid-center" id="sign-up">
+            <div class="col flex-center" id="sign-up">
                 <div class="form">
 
                     <!--  Registration form   -->
@@ -67,7 +69,7 @@
                     <h1 id="welcome-user">Hello Kristina </h1>
                     <h2 class="subtitle">nice to meet you</h2>
                 </div>
-            <button class="welcome__link grid-center white-btn" id="sign-out">Sign out</button>
+            <button class="welcome__link flex-center white-btn" id="sign-out">Sign out</button>
             <button class="btn-link" id="delete-account">Delete an account</button>
         </div>
     </section>
