@@ -22,15 +22,24 @@ let loginInCookie = getCookie("login"),
       pswValid = true;
 
 if ( loginInCookie) {
-    if( getCookie("signed-out") ) {
-        getElem("user-login").value = loginInCookie
-        mainContainer.classList.add("login","animation-show");
-    } else {
-        getElem("login-container").style.display = "none";
-        fetch ( `https://garevna-rest-api.glitch.me/user/${ loginInCookie }`)
-            .then (response => response.json())
-                .then(user => user.password === getCookie("psw") ? showAccount(user) : pswValid = false )
-                    .then( () => pswValid ? getElem("user-account").style.display = "grid" : null ) }
+    fetch ( `https://garevna-rest-api.glitch.me/user/${ loginInCookie }`)
+        .then (response => response.json())
+        .then(response => {
+            if(response.error !== 404 ) {
+                if( getCookie("signed-out") ) {
+                    getElem("user-login").value = loginInCookie;
+                    mainContainer.classList.add("login","animation-show");
+                } else {
+                    getElem("login-container").style.display = "none";
+                    fetch ( `https://garevna-rest-api.glitch.me/user/${ loginInCookie }`)
+                        .then (response => response.json())
+                        .then(user => user.password === getCookie("psw") ? showAccount(user) : pswValid = false )
+                        .then( () => pswValid ? getElem("user-account").style.display = "grid" : null ) }
+            } else {
+                mainContainer.classList.add("login","animation-show");
+                removeCookie();
+            }
+        })
 } else {
     mainContainer.classList.add("login","animation-show");
 }
@@ -381,11 +390,14 @@ getElem("delete-account").onclick = function (event) {
             "Content-Type": "application/json"
         }
     }).then ( response => {
-        document.cookie = "login=; expires=" + emptyDate;
-        document.cookie = "psw=; expires=" + emptyDate;
-        document.cookie = "signed out=; expires=" + emptyDate;
+        removeCookie();
         for (field of formFields)  { field.value = "" }
         triggerDisplay("user-account", "login-container" )
     } )
 }
 
+function removeCookie() {
+    document.cookie = "login=; expires=" + emptyDate;
+    document.cookie = "psw=; expires=" + emptyDate;
+    document.cookie = "signed out=; expires=" + emptyDate;
+}
