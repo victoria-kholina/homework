@@ -1,8 +1,5 @@
 history.replaceState(null, null, ' ');
 
-window.onload = function() {
-    getElem("preloader").style.display = "none";
-};
 
 function getElem(elemId) {
     return  document.getElementById(elemId);
@@ -11,7 +8,7 @@ function getElem(elemId) {
 let  mainContainer = getElem("login-page");
 
 function getCookie(key) {  // get info form cookies and autofill form inputs in sign in form
-    var cookieValue;
+    let cookieValue;
     document.cookie.split("; ")
         .map(item => item.split("="))
             .map(item =>  item[0] === key ? cookieValue = item[1] : null )
@@ -34,14 +31,19 @@ if ( loginInCookie) {
                     fetch ( `https://garevna-rest-api.glitch.me/user/${ loginInCookie }`)
                         .then (response => response.json())
                         .then(user => user.password === getCookie("psw") ? showAccount(user) : pswValid = false )
-                        .then( () => pswValid ? getElem("user-account").style.display = "grid" : null ) }
+                        .then( () => pswValid ? getElem("user-account").style.display = "grid" : null )
+
+                }
+                getElem("preloader").style.display = "none";
             } else {
                 mainContainer.classList.add("login","animation-show");
-                removeCookie();
-            }
+                removeCookie();}
+                getElem("preloader").style.display = "none";
         })
 } else {
     mainContainer.classList.add("login","animation-show");
+    getElem("preloader").style.display = "none";
+
 }
 
 for(  var eye of document.getElementsByClassName("eye") ) {
@@ -159,7 +161,11 @@ function triggerDisplay(elemHide, elemShow) {   // Animation trigger
        mainContainer.classList.add("animation-show");
        getElem(elemHide).style.display ="none";
        getElem(elemShow).style.display ="grid";
-       elemShow == "login-container" ? mainContainer.classList.add("login") : mainContainer.classList.remove("login")
+       if(elemShow == "login-container" ) {
+           mainContainer.classList.add("login")
+       } else  {
+           mainContainer.classList.remove("login")
+       }
    },700)
 }
 
@@ -174,18 +180,21 @@ function showAccount(user) {
     getElem("user-name").innerHTML = `Hello ${user.login}`
     getElem("date").innerText = new Date().toLocaleString('en-US', { dateStyle: 'full' });
     observer.observe ( getElem("tasks"), config );
+
     fetch ( `https://garevna-rest-api.glitch.me/user/${ loginInCookie }` )
         .then ( response => response.json() )
         .then ( user =>  {
-            user.tasks.forEach( task=> {
-                addTask( task.task, task.status).setAttribute("id",task.id)
-                } )
+            console.log(user);
+            // user.tasks.forEach( task=> {
+            //     addTask( task.task, task.status).setAttribute("id",task.id)
+            //     } )
             hideTasks("done");
             countTasks();
         })
     document.cookie= `login=${user.login}`;
     document.cookie= `psw=${user.password}`;
     document.cookie = "signed-out=; expires=" + emptyDate; // reset time, clearing cookie
+    getElem("preloader").style.display = "none";
 }
 
 var observer = new MutationObserver (
@@ -291,17 +300,22 @@ getElem("add-task").onclick = function (event) {
         .then ( response => response.json() )
         .then ( user =>  {
             let userTasks =  user.tasks;
+            console.log(userTasks)
             userTasks.push({
                 id: newTask.getAttribute( "id"),
                 task: getElem("new-task").value,
                 status: "new"
             })
-            let cleanValue = function() {
-                    getElem("new-task").value = "";
-                    getElem("new-task").placeholder ="What is your task for today? ";
-                    countTasks();
+            console.log(userTasks)
+           function cleanValue () {
+                getElem("new-task").value = "";
+                getElem("new-task").placeholder ="What is your task for today? ";
+                countTasks();
             }
+
+            console.log(userTasks)
             requestToEditTasks(userTasks, cleanValue())
+
         })
 }
 
